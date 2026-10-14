@@ -1,0 +1,201 @@
+﻿@import "tailwindcss";
+@import "./fonts.css";
+
+@theme {
+  --color-accent: #04F601;
+  --color-background: #fff;
+  --color-foreground: #585858;
+  --color-panel-border: #999797;
+  --font-body: 'Hind', sans-serif;
+  --font-heading: 'Inconsolata', monospace;
+}
+:root { font-family: var(--font-body); color: var(--color-foreground); font-size: 14px; font-synthesis: none; }
+body {
+  margin: 0; min-width: 320px; min-height: 100vh; background-color: white;
+  background-image:
+    linear-gradient(to right, #b5b5b530 1px, transparent 1px),
+    linear-gradient(to bottom, #b5b5b530 1px, transparent 1px),
+    linear-gradient(to right, #aaa7 1.5px, transparent 1.5px),
+    linear-gradient(to bottom, #aaa7 1.5px, transparent 1.5px);
+  background-size: 7.5px 7.2px, 7.5px 7.2px, 37.5px 36px, 37.5px 36px;
+  background-position: 30px 0;
+}
+::selection { background: var(--color-accent); color: #111; }
+a { color: inherit; text-decoration: none; }
+a:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px; }
+.portfolio-shell { max-width: 1366px; margin: 0 auto; padding: 43px 60px 41px; }
+.panel { background: white; border: 2px dashed var(--color-panel-border); border-radius: 2px; }
+.section-heading { font-family: var(--font-heading); font-size: 16px; font-weight: 700; line-height: 22px; }
+.portfolio-header { height: 125px; grid-template-columns: minmax(0,664fr) minmax(0,574fr); padding: 1px 2px 2px; }
+.outlined-heading { width: 573px; max-width: 100%; margin-left: 9px; font-family: var(--font-heading); font-size: 64px; font-weight: 700; letter-spacing: 2.56px; line-height: 1.04; color: white; -webkit-text-stroke: 1.5px #585858; text-align: center; }
+.header-placeholder { height: 100%; background: #d9d9d9; }
+.portfolio-grid { display: grid; grid-template-columns: minmax(0,316fr) minmax(0,562fr) minmax(0,316fr); gap: 26px; margin-top: 28px; }
+.left-column, .right-column { height: 533px; padding: 18px 19px; min-width: 0; }
+.inset-panel { position: relative; padding: 20px 19px 12px; }
+.panel-label { position: absolute; top: -13px; left: 18px; padding: 0 5px; background: white; white-space: nowrap; }
+.quests-panel { height: 247px; }
+.quest-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 35px;
+  padding: 3px 4px;
+  background: url('/figma/row-line.svg') left bottom / 100% 1px no-repeat;
+  transition: background-color 225ms ease-out;
+}
+.quest-row:hover { background-color: rgb(4 246 1 / 12%); }
+.quest-icon { flex: 0 0 14px; }
+.quest-details { min-width: 0; }
+.quest-title { font-size: 12px; line-height: 14px; }
+.quest-status { font-family: var(--font-heading); font-size: 10px; line-height: 12px; letter-spacing: 0.4px; }
+@media (prefers-reduced-motion: reduce) {
+  .quest-row { transition: none; }
+}
+.numbered-list li { display: flex; align-items: center; gap: 6px; padding-left: 10px; height: 31px; background: url('/figma/row-line.svg') left bottom / 100% 1px no-repeat; }
+.numbered-list .section-heading { flex: 0 0 16px; }
+.decoration { font-family: 'Montserrat', sans-serif; font-size: 16px; font-weight: 900; line-height: 22px; }
+.quests-panel .decoration { margin-top: 12px; }
+.social-panel { height: 198px; margin-top: 29px; padding-top: 20px; }
+.social-list li { display: flex; align-items: center; gap: 7px; height: 31px; background: url('/figma/row-line.svg') left bottom / 100% 1px no-repeat; }
+.social-list img { width: 34px; height: 29px; object-fit: contain; flex-shrink: 0; }
+.social-panel .decoration { margin-top: 20px; }
+/* Only social profiles and the HIVE link use this shared row interaction. */
+.external-row {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  width: 100%;
+  height: 100%;
+}
+.external-row::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 1px;
+  z-index: -1;
+  background: var(--color-accent);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 250ms ease-out;
+}
+.external-row:is(:hover, :focus-visible)::before { transform: scaleX(1); }
+.external-row:focus-visible { outline: 2px solid var(--color-foreground); outline-offset: 2px; }
+.external-label { transition: transform 250ms ease-out, text-shadow 250ms ease-out; }
+/* A slight text stroke adds weight without changing text width or row geometry. */
+.social-panel .external-row:is(:hover, :focus-visible) .external-label { text-shadow: 0.25px 0 currentColor, -0.25px 0 currentColor; }
+.external-arrow {
+  flex-shrink: 0;
+  margin-left: auto;
+  margin-right: 3px;
+  font-size: 12px;
+  line-height: 1;
+  transition: transform 250ms ease-out;
+}
+.external-row:is(:hover, :focus-visible) .external-arrow { transform: translate(2px, -2px); }
+.case-panel .numbered-list li { padding-left: 0; }
+.case-panel .external-row { gap: 6px; padding-left: 10px; }
+.case-panel .external-row:is(:hover, :focus-visible) .external-label { transform: translateX(3px); }
+@media (prefers-reduced-motion: reduce) {
+  .external-row::before, .external-label, .external-arrow { transition: none; }
+  .external-row:is(:hover, :focus-visible) .external-arrow,
+  .case-panel .external-row:is(:hover, :focus-visible) .external-label { transform: none; }
+}
+.center-column { gap: 23px; }
+.about-panel { min-height: 387px; padding: 24px 26px 24px 30px; }
+.about-intro { grid-template-columns: 162px minmax(0,1fr); gap: 28px; }
+.profile-image { width: 162px; height: 162px; object-fit: cover; margin-top: 21px; background: var(--color-accent); }
+.bio { line-height: 22px; text-align: justify; }
+.likes-heading { margin-top: 4px; }
+.likes-list { grid-template-rows: repeat(3,20px); grid-auto-flow: column; grid-template-columns: 183px minmax(0,1fr); margin-left: 13px; }
+.likes-list li { white-space: nowrap; line-height: 20px; }
+.likes-list img { width: 17px; height: 15px; flex-shrink: 0; }
+.currently { margin-top: 7px; }
+.currently dl > div { grid-template-columns: 100px minmax(0,1fr); line-height: 22px; }
+.portfolio-note { min-height: 123px; padding: 20px 12px; line-height: 21px; }
+.right-column { padding-top: 40px; }
+.projects-panel, .case-panel { height: 151px; padding-top: 20px; }
+.projects-panel .decoration { margin-top: 4px; }
+.case-panel { margin-top: 29px; }
+.case-panel .decoration { margin-top: 32px; }
+.decorative-images { margin-top: 29px; gap: 16px; }
+.cat-frame, .character-frame { width: 118px; height: 90px; flex-shrink: 0; }
+.cat-frame { position: relative; overflow: hidden; }
+.cat-frame img { position: absolute; width: 118px; height: 118px; max-width: none; left: -2px; top: -8.5px; }
+.character-frame img { width: 63px; height: 63px; object-fit: cover; }
+
+@media (max-width: 1250px) {
+  .portfolio-shell { padding: 32px 28px; }
+  .portfolio-grid { gap: 20px; grid-template-columns: minmax(220px,1fr) minmax(400px,1.78fr) minmax(220px,1fr); }
+  .about-panel { padding-inline: 20px; }
+  .about-intro { grid-template-columns: 120px minmax(0,1fr); gap: 18px; }
+  .profile-image { width: 120px; height: 120px; }
+  .likes-list { margin-left: 0; grid-template-columns: 1.1fr 1fr; font-size: 12px; }
+  .outlined-heading { width: auto; margin-left: 0; font-size: clamp(32px,4.65vw,64px); }
+  .left-column,.right-column { padding-inline: 14px; }
+  .inset-panel { padding-inline: 12px; }
+  .cat-frame,.character-frame { width: 90px; }
+}
+/* Tablets: give the introduction room, then keep both side panels together. */
+@media (max-width: 1100px) {
+  .portfolio-grid {
+    grid-template-columns: repeat(2,minmax(0,1fr));
+    grid-template-areas: 'about about' 'personal projects';
+    align-items: start;
+    gap: 24px;
+  }
+  .center-column { grid-area: about; gap: 20px; }
+  .left-column { grid-area: personal; }
+  .right-column { grid-area: projects; }
+  .about-panel { min-height: 0; padding: 26px; }
+  .about-intro { grid-template-columns: 162px minmax(0,1fr); gap: 28px; }
+  .profile-image { width: 162px; height: 162px; margin-top: 0; }
+  .likes-list { font-size: 14px; grid-template-columns: repeat(2,minmax(0,1fr)); grid-template-rows: repeat(3,auto); }
+  .likes-list li { min-height: 20px; white-space: normal; }
+  .currently { margin-top: 24px; }
+  .left-column,.right-column { padding-inline: 19px; }
+  .inset-panel { padding-inline: 19px; }
+  .cat-frame,.character-frame { width: 118px; }
+  .quest-row { height: auto; min-height: 35px; }
+  .quests-panel { height: auto; min-height: 247px; }
+}
+/* Phones: a readable single column and comfortable touch targets. */
+@media (max-width: 700px) {
+  .portfolio-shell { padding: 24px 16px; }
+  .portfolio-header { height: auto; min-height: 125px; grid-template-columns: 1fr; padding: 12px; gap: 14px; }
+  .outlined-heading { width: auto; margin-left: 0; font-size: clamp(26px,7.6vw,48px); letter-spacing: 1px; -webkit-text-stroke-width: 1px; }
+  .header-placeholder { height: 32px; }
+  .portfolio-grid { display: flex; flex-direction: column; gap: 24px; margin-top: 24px; }
+  .portfolio-grid > * { width: 100%; }
+  .center-column { order: -1; gap: 24px; }
+  .about-panel { padding: 20px; }
+  .about-intro { grid-template-columns: 120px minmax(0,1fr); gap: 20px; }
+  .profile-image { width: 120px; height: 120px; }
+  .bio { text-align: left; }
+  .left-column { height: auto; padding: 24px 20px; }
+  .quest-row { min-height: 40px; }
+  .quest-title { font-size: 13px; line-height: 16px; }
+  .social-panel { height: auto; min-height: 198px; }
+  .social-list li { height: 44px; }
+  .right-column { height: auto; padding: 32px 20px 24px; }
+  .projects-panel { height: auto; min-height: 151px; }
+  .projects-panel ol { height: auto; }
+  .projects-panel li,.projects-panel button { height: 44px; }
+  .case-panel { margin-top: 29px; }
+  .case-panel .numbered-list li { height: 44px; }
+  .decorative-images { justify-content: center; gap: 24px; }
+}
+@media (max-width: 560px) {
+  .about-intro { grid-template-columns: minmax(0,1fr); gap: 20px; }
+  .profile-image { width: 140px; height: 140px; justify-self: center; }
+  .likes-list { margin-top: 4px; column-gap: 12px; }
+  .currently dl > div { grid-template-columns: 90px minmax(0,1fr); }
+  .currently dd { overflow-wrap: anywhere; }
+}
+@media (max-width: 380px) {
+  .likes-list { display: flex; flex-direction: column; }
+  .currently dl > div { grid-template-columns: 80px minmax(0,1fr); }
+  .left-column,.right-column { padding-inline: 14px; }
+  .inset-panel { padding-inline: 14px; }
+}
+
