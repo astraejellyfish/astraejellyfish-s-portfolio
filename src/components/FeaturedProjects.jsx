@@ -30,17 +30,14 @@ export default function FeaturedProjects() {
     <Panel title="case study" className="case-panel">
       <ol className="numbered-list">
         <li>
-          <a
+          <ProjectCard
+            title="HIVE"
+            number={1}
+            screenshot="/images/hive.png"
+            open={activeProject === 'HIVE'}
+            onOpenChange={value => changePreview('HIVE', value)}
             href="https://drive.google.com/drive/folders/1cC_yCdrjm0h0rCwg2EuW6Q7Z2yNyefM3"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="external-row"
-            aria-label="01 HIVE case study (opens in a new tab)"
-          >
-            <span className="section-heading" aria-hidden="true">01</span>
-            <span className="external-label">HIVE</span>
-            <span className="external-arrow" aria-hidden="true">↗</span>
-          </a>
+          />
         </li>
       </ol>
       <Decoration>⋆｡𖦹°⭒˚｡⋆ ✮⋆˙</Decoration>

@@ -11,7 +11,7 @@ const subscribeMotionPreference = notify => {
 }
 const readMotionPreference = () => window.matchMedia(motionQuery).matches
 
-export default function ProjectCard({ title, screenshot, number, open, onOpenChange: setOpen }) {
+export default function ProjectCard({ title, screenshot, number, open, onOpenChange: setOpen, href }) {
   const reduceMotion = useSyncExternalStore(subscribeMotionPreference, readMotionPreference, () => true)
   const [position, setPosition] = useState(null)
   const [failedScreenshot, setFailedScreenshot] = useState(null)
@@ -20,6 +20,7 @@ export default function ProjectCard({ title, screenshot, number, open, onOpenCha
   const pointerType = useRef(null)
   const previewId = useId()
   const showScreenshot = screenshot && failedScreenshot !== screenshot
+  const Trigger = href ? 'a' : 'button'
 
   // A body portal escapes panel clipping. Fixed coordinates track the trigger
   // without participating in the portfolio's layout or intercepting the pointer.
@@ -87,11 +88,14 @@ export default function ProjectCard({ title, screenshot, number, open, onOpenCha
 
   return (
     <>
-      <button
+      <Trigger
         ref={triggerRef}
-        type="button"
-        className="flex h-[31px] w-full min-w-0 cursor-default items-center gap-[6px] bg-transparent pl-[10px] text-left text-inherit focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
-        aria-label={`Preview ${title}`}
+        type={href ? undefined : 'button'}
+        href={href}
+        target={href ? '_blank' : undefined}
+        rel={href ? 'noopener noreferrer' : undefined}
+        className={href ? 'external-row' : 'flex h-[31px] w-full min-w-0 cursor-default items-center gap-[6px] bg-transparent pl-[10px] text-left text-inherit focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent'}
+        aria-label={href ? `${String(number).padStart(2, '0')} ${title} case study (opens in a new tab)` : `Preview ${title}`}
         aria-describedby={open ? previewId : undefined}
         aria-expanded={open}
         onPointerDown={event => { pointerType.current = event.pointerType }}
@@ -102,12 +106,21 @@ export default function ProjectCard({ title, screenshot, number, open, onOpenCha
         onFocus={() => { if (pointerType.current !== 'touch') setOpen(true) }}
         onBlur={() => { setOpen(false); pointerType.current = null }}
         onClick={event => {
+          if (href) {
+            // First touch previews the screenshot; a second tap follows the link.
+            if (pointerType.current === 'touch' && !open) {
+              event.preventDefault()
+              setOpen(true)
+            }
+            return
+          }
           if (pointerType.current === 'touch' || event.detail === 0) setOpen(value => !value)
         }}
       >
         <span className="section-heading basis-[16px] shrink-0" aria-hidden="true">{String(number).padStart(2, '0')}</span>
-        <span className="text-[14px]">{title}</span>
-      </button>
+        <span className={href ? 'external-label' : 'text-[14px]'}>{title}</span>
+        {href && <span className="external-arrow" aria-hidden="true">↗</span>}
+      </Trigger>
       {createPortal(
         <AnimatePresence>
           {open && (
