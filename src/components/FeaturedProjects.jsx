@@ -1,11 +1,13 @@
 ﻿import Panel, { Decoration } from './Panel'
 import ProjectCard from './ProjectCard'
+import DecorativeSticker from './DecorativeSticker'
+import MusicPlayer from './MusicPlayer'
 import { useState } from 'react'
 
 const projects = [
   { title: 'Class Connect', screenshot: '/images/projects/classconnect.png' },
-  { title: 'Tamagotchi Pet', screenshot: '/images/projects/tamagotchi.jpg' },
-  { title: 'Mini logs', screenshot: null },
+  { title: 'Music Diary', screenshot: '/images/projects/tamagotchi.jpg' },
+  { title: 'To Do List', screenshot: null },
 ]
 
 export default function FeaturedProjects() {
@@ -40,12 +42,12 @@ export default function FeaturedProjects() {
           />
         </li>
       </ol>
-      <Decoration>⋆｡𖦹°⭒˚｡⋆ ✮⋆˙</Decoration>
     </Panel>
     <div className="decorative-images flex justify-between" aria-hidden="true">
-      <div className="panel cat-frame"><img src="/figma/cat.png" alt="" width="118" height="118" /></div>
-      <div className="panel character-frame flex items-center justify-center"><img src="/figma/katsuki.png" alt="" width="63" height="63" /></div>
+      <DecorativeSticker className="panel cat-frame" src={`${import.meta.env.BASE_URL}figma/cat.gif`} width={1080} height={1080} tilt={-4} />
+      <DecorativeSticker className="panel character-frame" src={`${import.meta.env.BASE_URL}figma/toga.jpg`} width={1024} height={1280} tilt={4} />
     </div>
+    <MusicPlayer />
   </aside>
 }
 

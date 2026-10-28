@@ -18,7 +18,9 @@ export default function BarcodeDecoration({ className = '' }) {
       aria-hidden="true"
       focusable="false"
     >
-      {bars.map(([x, width]) => <rect key={x} x={x} y="0" width={width} height="44" />)}
+      <g className="barcode-bars">
+        {bars.map(([x, width]) => <rect key={x} x={x} y="0" width={width} height="44" />)}
+      </g>
     </svg>
   )
 }

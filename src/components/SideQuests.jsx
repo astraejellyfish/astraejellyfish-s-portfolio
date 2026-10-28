@@ -24,7 +24,7 @@ function QuestIcon({ name }) {
 const socials = [
   { icon: 'discord', platform: 'Discord', handle: 'astrae.jellyfish', href: 'https://discord.com/users/1338152437868924952' },
   { icon: 'spotify', platform: 'Spotify', handle: 'starkururi', href: 'https://open.spotify.com/user/315lmvfy7v6pk6kl43q63jkw7uhq?si=5c9c0b4c7fc647d9' },
-  { icon: 'instagram', platform: 'Instagram', handle: 'astraejellyfish', href: 'https://www.instagram.com/starkururi?obrf=b2Jrd2twbmU2ZmVy' },
+  { icon: 'instagram', platform: 'Instagram', handle: 'starkururi', href: 'https://www.instagram.com/starkururi?obrf=b2Jrd2twbmU2ZmVy' },
   { icon: 'github', platform: 'GitHub', handle: 'astraejellyfish', href: 'https://github.com/astraejellyfish' },
 ]
 export default function SideQuests() {
