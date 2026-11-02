@@ -22,8 +22,7 @@ export default function ProjectCard({ title, screenshot, number, open, onOpenCha
   const showScreenshot = screenshot && failedScreenshot !== screenshot
   const Trigger = href ? 'a' : 'button'
 
-  // A body portal escapes panel clipping. Fixed coordinates track the trigger
-  // without participating in the portfolio's layout or intercepting the pointer.
+  // panel clipping. fixed coordinates track the trigger
   useLayoutEffect(() => {
     if (!open) return
     const placePreview = () => {
@@ -107,7 +106,7 @@ export default function ProjectCard({ title, screenshot, number, open, onOpenCha
         onBlur={() => { setOpen(false); pointerType.current = null }}
         onClick={event => {
           if (href) {
-            // First touch previews the screenshot; a second tap follows the link.
+            // first touch previews the screenshot; a second tap follows the link.
             if (pointerType.current === 'touch' && !open) {
               event.preventDefault()
               setOpen(true)

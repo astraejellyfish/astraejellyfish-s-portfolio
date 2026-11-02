@@ -26,10 +26,19 @@ a:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px; }
 .portfolio-shell { max-width: 1366px; margin: 0 auto; padding: 43px 60px 41px; }
 .panel { background: white; border: 2px dashed var(--color-panel-border); border-radius: 2px; }
 .section-heading { font-family: var(--font-heading); font-size: 16px; font-weight: 700; line-height: 22px; }
-.portfolio-header { position: relative; height: 125px; grid-template-columns: minmax(0,664fr) minmax(0,574fr); padding: 1px 2px 2px; }
+.portfolio-header { position: relative; height: 125px; grid-template-columns: minmax(0,664fr) minmax(0,574fr); padding: 1px 2px 2px; background: #fff; }
 .header-status { position: absolute; left: 28px; bottom: 7px; font-family: var(--font-heading); font-size: 12px; line-height: 14px; white-space: nowrap; }
 .header-status span { color: var(--color-accent); }
-.outlined-heading { width: 573px; max-width: 100%; margin-left: 9px; font-family: var(--font-heading); font-size: 64px; font-weight: 700; letter-spacing: 2.56px; line-height: 1.04; color: white; -webkit-text-stroke: 1.5px #585858; text-align: center; }
+.portfolio-heading { width: 573px; max-width: 100%; margin-left: 9px; font-family: var(--font-heading); font-size: 64px; font-weight: 700; letter-spacing: 2.56px; line-height: 1.04; color: #585858; background: #fff; text-align: center; }
+.portfolio-title { display: block; width: 100%; padding: 0; border: 0; outline: none; box-shadow: none; appearance: none; background: none; color: inherit; font: inherit; letter-spacing: inherit; text-align: inherit; cursor: pointer; }
+.portfolio-title:hover { color: #333; }
+.portfolio-title:focus-visible { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 6px; }
+/* Hidden glyphs retain the full title's space throughout the one-shot reveal. */
+.portfolio-title.is-typing .title-character { animation: title-reveal 1ms step-end both; animation-delay: calc(var(--character-index) * 65ms); }
+@keyframes title-reveal { from { visibility: hidden; } to { visibility: visible; } }
+@media (prefers-reduced-motion: reduce) {
+  .portfolio-title.is-typing .title-character { animation: none; }
+}
 .portfolio-grid { display: grid; grid-template-columns: minmax(0,316fr) minmax(0,562fr) minmax(0,316fr); gap: 26px; margin-top: 28px; }
 .left-column, .right-column { height: 533px; padding: 18px 19px; min-width: 0; }
 .inset-panel { position: relative; padding: 20px 19px 12px; }
@@ -187,7 +196,7 @@ a:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px; }
   .about-intro { grid-template-columns: 120px minmax(0,1fr); gap: 18px; }
   .profile-image { width: 120px; height: 120px; }
   .likes-list { margin-left: 0; grid-template-columns: 1.1fr 1fr; font-size: 13px; }
-  .outlined-heading { width: auto; margin-left: 0; font-size: clamp(32px,4.65vw,64px); }
+  .portfolio-heading { width: auto; margin-left: 0; font-size: clamp(32px,4.65vw,64px); }
   .left-column,.right-column { padding-inline: 14px; }
   .inset-panel { padding-inline: 12px; }
   .cat-frame,.character-frame { width: 90px; }
@@ -220,7 +229,7 @@ a:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px; }
   .header-status { display: none; }
   .portfolio-shell { padding: 24px 16px; }
   .portfolio-header { height: auto; min-height: 125px; grid-template-columns: 1fr; padding: 12px; gap: 14px; }
-  .outlined-heading { width: auto; margin-left: 0; font-size: clamp(26px,7.6vw,48px); letter-spacing: 1px; -webkit-text-stroke-width: 1px; }
+  .portfolio-heading { width: auto; margin-left: 0; font-size: clamp(26px,7.6vw,48px); letter-spacing: 1px; }
   .portfolio-grid { display: flex; flex-direction: column; gap: 24px; margin-top: 24px; }
   .portfolio-grid > * { width: 100%; }
   .center-column { order: -1; gap: 24px; }

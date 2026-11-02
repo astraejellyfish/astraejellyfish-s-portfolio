@@ -1,5 +1,5 @@
 ﻿import Panel, { Decoration } from './Panel'
-// Update these titles, statuses, and icon names as your personal quests evolve.
+// updating? nahhhh~
 const quests = [
   { id: 'bass', icon: 'music', title: 'Learning bass guitar', status: 'IN PROGRESS' },
   { id: 'piano', icon: 'piano', title: 'Learning piano', status: 'LEARNING' },

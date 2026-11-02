@@ -29,11 +29,15 @@ export default function NyanCat() {
             </pattern>
           ))}
         </defs>
-        {/* Original right-facing frames, shifted without changing their scale. */}
+        {
+
+        } /// original right-facing frames shifted.
         <g transform="translate(12 0)">
           {NYAN_FRAMES.map((paths, frame) => (
             <g key={frame} className="nyan-animation-frame" style={{ animationDelay: `${frame * NYAN_FRAME_MS}ms` }}>
-              {/* Repeat this frame's own trail tile into the unused header space. */}
+              {
+                /// repeat this frame's own trail tile into the unused header space.
+              }
               <rect x="-1024" y="0" width="1032" height="32" fill={`url(#nyan-extended-trail-${patternId}-${frame})`} />
               {paths.map(({ fill, d }) => <path key={fill} fill={fill} d={d} />)}
             </g>

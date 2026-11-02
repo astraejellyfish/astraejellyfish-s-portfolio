@@ -14,10 +14,9 @@
   width: calc(100% - 8px);
   height: calc(100% - 8px);
   image-rendering: pixelated;
-  /* Extend only the trail through SVG letterboxing; the header slot clips it. */
   overflow: visible;
 }
-/* Twelve synchronized poses preserve the source's 90ms frame timing. */
+/* animation cycle duration is 12 frames * 90ms per frame = 1080ms */
 .nyan-animation-frame {
   opacity: 0;
   animation: nyan-frame-cycle var(--nyan-cycle) steps(1, end) infinite;

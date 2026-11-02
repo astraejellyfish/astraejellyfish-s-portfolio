@@ -1,4 +1,4 @@
-// Decorative bar pattern, rather than an encoded or scannable identifier.
+//bar pattern recycled
 const bars = [
   [0, 2], [4, 1], [7, 3], [12, 1], [15, 2], [19, 4],
   [25, 1], [28, 2], [32, 1], [35, 4], [41, 2], [45, 1],

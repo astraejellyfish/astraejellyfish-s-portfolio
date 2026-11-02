@@ -1,14 +1,19 @@
 import { useEffect, useRef, useState } from 'react'
 
-// Edit these sections when replacing the audio or adding attribution details.
+// can edit these sections when replacing the audio or adding attribution details.
 const credits = [
   { title: 'audio', text: 'music cover by certified trash', links: [
     { label: 'youtube: @certifiedtrash', href: 'https://www.youtube.com/@certifiedtrash' },
     { label: 'soundcloud: certified_trash', href: 'https://soundcloud.com/certified_trash' },
   ] },
+  { title: 'sound fx', text: 'sound effects by freesound.org', links: [
+    { label: 'freesound_community', href: 'https://pixabay.com/users/freesound_community-46691455/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=81124' },
+  ] },
+  { title: 'sound fx', text: 'sound effects by dragon studio', links: [
+    { label: 'dragon studio', href: 'https://pixabay.com/sound-effects/film-special-effects-typing-keyboard-asmr-356116/' },
+  ] },
 ]
 
-// Storage can be unavailable in private browsing or embedded previews.
 function readMusicSession() {
   try { return JSON.parse(sessionStorage.getItem('portfolio-music')) || {} }
   catch { return {} }
@@ -17,7 +22,7 @@ function readMusicSession() {
 function saveMusicSession(audio, shouldPlay) {
   try {
     sessionStorage.setItem('portfolio-music', JSON.stringify({ time: audio.currentTime, shouldPlay }))
-  } catch { /* Playback still works when storage is unavailable. */ }
+  } catch { }
 }
 
 export default function MusicPlayer() {
@@ -79,13 +84,13 @@ export default function MusicPlayer() {
     }
 
     function retryPlayback(event) {
-      // The player's own controls manage playback directly.
+      // the player's own controls manage playback directly.
       if (!event.isTrusted || event.target?.closest?.('.music-corner')) return
       if (event.type === 'keydown' && (event.repeat || event.ctrlKey || event.metaKey || event.altKey || !['Enter', ' '].includes(event.key))) return
       if (shouldPlayRef.current && audio.paused) tryPlayback()
     }
 
-    // Sound autoplay still depends on the visitor's browser permissions.
+    // sound autoplay still depends on the visitor's browser permissions.
     if (shouldPlayRef.current) tryPlayback()
     return () => {
       active = false
@@ -153,9 +158,10 @@ export default function MusicPlayer() {
         <button ref={closeButtonRef} type="button" onClick={() => dialogRef.current.close()} aria-label="Close credits">[ x ]</button>
       </div>
       <div className="credits-body">
-        {credits.map(({ title, text, links }) => <section key={title}>
+        {credits.map(({ title, text, attribution, links }) => <section key={`${title}-${text}`}>
           <h3>/{title}</h3>
           <p>{text}</p>
+          {attribution && <p>{attribution}</p>}
           {links?.map(({ label, href }) => <a key={href} href={href} target="_blank" rel="noopener noreferrer">{label}<span className="sr-only"> (opens in a new tab)</span> ↗</a>)}
         </section>)}
       </div>

@@ -6,8 +6,8 @@ import { useState } from 'react'
 
 const projects = [
   { title: 'Class Connect', screenshot: '/images/projects/classconnect.png' },
-  { title: 'Music Diary', screenshot: '/images/projects/tamagotchi.jpg' },
-  { title: 'To Do List', screenshot: null },
+  { title: 'Music Diary', screenshot: null},
+  { title: 'SuDo', screenshot: null },
 ]
 
 export default function FeaturedProjects() {
@@ -38,14 +38,14 @@ export default function FeaturedProjects() {
             screenshot="/images/hive.png"
             open={activeProject === 'HIVE'}
             onOpenChange={value => changePreview('HIVE', value)}
-            href="https://drive.google.com/drive/folders/1cC_yCdrjm0h0rCwg2EuW6Q7Z2yNyefM3"
+            href="https://drive.google.com/drive/folders/12eh_ikcEwX-_JjTiAMsQkEvu3S9VOCdw?usp=sharing"
           />
         </li>
       </ol>
     </Panel>
     <div className="decorative-images flex justify-between" aria-hidden="true">
       <DecorativeSticker className="panel cat-frame" src={`${import.meta.env.BASE_URL}figma/cat.gif`} width={1080} height={1080} tilt={-4} />
-      <DecorativeSticker className="panel character-frame" src={`${import.meta.env.BASE_URL}figma/toga.jpg`} width={1024} height={1280} tilt={4} />
+      <DecorativeSticker className="panel character-frame" src={`${import.meta.env.BASE_URL}figma/neon-character.png`} width={1024} height={1280} tilt={4} />
     </div>
     <MusicPlayer />
   </aside>
