@@ -1,0 +1,14 @@
+{
+  "name": "astraee-visitor-counter",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev --env local --local --ip 127.0.0.1 --port 8787",
+    "test": "node --test --test-concurrency=1 test/backend.test.mjs test/client.test.mjs",
+    "test:browser": "node test/browser.mjs"
+  },
+  "devDependencies": {
+    "miniflare": "4.20260730.0",
+    "wrangler": "4.156.2"
+  }
+}

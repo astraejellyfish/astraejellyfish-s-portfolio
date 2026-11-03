@@ -39,6 +39,9 @@ jobs:
 
       - name: Build
         run: npm run build
+        env:
+          VITE_VISITOR_COUNTER_ENABLED: 'true'
+          VITE_VISITOR_COUNTER_URL: 'https://astraee-visitor-counter.parazoshaine-commission.workers.dev'
 
       - name: Configure GitHub Pages
         uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6

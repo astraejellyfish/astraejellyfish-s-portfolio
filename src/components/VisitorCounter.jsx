@@ -11,7 +11,7 @@ export default function VisitorCounter({ count = null }) {
     <div
       className={`welcome-counter${tooltipDismissed ? ' tooltip-dismissed' : ''}`}
       tabIndex={0} role="group"
-      aria-label={digits === '----' ? 'Visitor count unavailable' : `${digits} page visits`}
+      aria-label={digits === '----' ? 'Visitor count unavailable' : `${digits} visits`}
       aria-describedby={tooltipId}
       onPointerEnter={() => setTooltipDismissed(false)}
       onFocus={() => setTooltipDismissed(false)}

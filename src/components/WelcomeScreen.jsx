@@ -14,7 +14,7 @@ const subscribeMotion = notify => {
 const readMotion = () => window.matchMedia(motionQuery).matches
 const startPressDuration = 120
 
-export default function WelcomeScreen({ portfolioRef, onComplete, onPlayClick }) {
+export default function WelcomeScreen({ portfolioRef, onComplete, onPlayClick, visitorCount = null }) {
   const reduceMotion = useSyncExternalStore(subscribeMotion, readMotion, () => true)
   const [leaving, setLeaving] = useState(false)
   const [pressing, setPressing] = useState(false)
@@ -105,7 +105,7 @@ export default function WelcomeScreen({ portfolioRef, onComplete, onPlayClick })
     ref={screenRef} onKeyDown={trapFocus}
   >
     <div className="welcome-dimmer" aria-hidden="true" />
-    <VisitorCounter />
+    <VisitorCounter count={visitorCount} />
     <div className="welcome-down" onTransitionEnd={event => {
       if (event.target === event.currentTarget && event.propertyName === 'transform' && activatedRef.current) finish()
     }}>

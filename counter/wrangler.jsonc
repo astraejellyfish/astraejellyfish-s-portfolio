@@ -1,0 +1,32 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "astraee-visitor-counter",
+  "account_id": "1d49bbe600016df8ae1ac30e6707f6be",
+  "main": "src/index.js",
+  "compatibility_date": "2026-07-01",
+  "send_metrics": false,
+  "workers_dev": true,
+  "preview_urls": false,
+  "observability": { "enabled": false },
+  "vars": {
+    "ALLOWED_ORIGINS": "https://astraee.studio",
+    "SESSION_TIMEOUT_MS": "1800000"
+  },
+  "durable_objects": {
+    "bindings": [{ "name": "VISITS", "class_name": "VisitCounter" }]
+  },
+  "migrations": [{ "tag": "v1", "new_sqlite_classes": ["VisitCounter"] }],
+  "env": {
+    "local": {
+      "name": "astraee-visitor-counter-local",
+      "vars": {
+        "ALLOWED_ORIGINS": "https://astraee.studio,http://127.0.0.1:5175,http://localhost:5175",
+        "SESSION_TIMEOUT_MS": "1800000"
+      },
+      "durable_objects": {
+        "bindings": [{ "name": "VISITS", "class_name": "VisitCounter" }]
+      },
+      "migrations": [{ "tag": "v1", "new_sqlite_classes": ["VisitCounter"] }]
+    }
+  }
+}

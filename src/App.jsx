@@ -4,9 +4,11 @@ import SideQuests from './components/SideQuests'
 import FeaturedProjects from './components/FeaturedProjects'
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react'
 import WelcomeScreen from './components/WelcomeScreen'
+import useVisitorCount from './hooks/useVisitorCount'
 
 export default function App() {
   const [welcomeOpen, setWelcomeOpen] = useState(true)
+  const visitorCount = useVisitorCount()
   const portfolioRef = useRef(null)
   const clickAudioRef = useRef(null)
 
@@ -44,6 +46,6 @@ export default function App() {
     </main>
   </div>
   <audio ref={clickAudioRef} src={`${import.meta.env.BASE_URL}audio/start.mp3`} preload="auto" />
-  {welcomeOpen && <WelcomeScreen portfolioRef={portfolioRef} onComplete={() => setWelcomeOpen(false)} onPlayClick={playClickSound} />}
+  {welcomeOpen && <WelcomeScreen portfolioRef={portfolioRef} onComplete={() => setWelcomeOpen(false)} onPlayClick={playClickSound} visitorCount={visitorCount} />}
   </>
 }

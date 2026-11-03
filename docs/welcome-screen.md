@@ -12,7 +12,7 @@ After the welcome screen exits, the title reveals one character every 65 ms, onc
 
 The title is a native button within the heading, with inherited typography, a pointer cursor, a subtle dark hover color, and a keyboard-only underline for focus. The title has no border, outline, or box shadow. Focus moves to START when welcome opens and returns to the title when it closes. The header and heading use opaque white backgrounds, the existing dashed border, and filled dark gray text without a stroke on desktop and mobile.
 
-The portfolio, Nyan Cat, music player, project controls, and barcode remain mounted during return visits. EXIT/STAY? reuses the same app-owned click audio as START. Each activation pauses and rewinds that instance before playing. Audio errors do not interrupt the dialogue toggle. Changing the dialogue remounts the existing typewriter component, which clears its previous interval and stops its typing recording. No counting request is added. `VisitorCounter` remains display-only until a provider is configured, as described below; returning through the title cannot increment a live counter because no counting integration currently exists.
+The portfolio, Nyan Cat, music player, project controls, and barcode remain mounted during return visits. EXIT/STAY? reuses the same app-owned click audio as START. Each activation pauses and rewinds that instance before playing. Audio errors do not interrupt the dialogue toggle. Changing the dialogue remounts the existing typewriter component, which clears its previous interval and stops its typing recording. The session-counter controller is owned by the document, outside welcome, so these interactions do not create visits. See the counter configuration below.
 
 While the welcome, EXIT, or STAY? dialogue types, `TypewriterDialogue` plays `public/audio/typing-sounds.mp3` as one continuous looping recording at 8% volume. It does not restart per character. Completion, skipping, replacement, START, reduced motion, and unmounting all stop the recording and remove permission-retry listeners. If autoplay is denied, a trusted pointer or Enter/Space interaction retries playback only while that dialogue is still typing. Other playback errors are handled quietly.
 
@@ -24,24 +24,9 @@ The existing MusicPlayer remains mounted under the welcome screen and retains it
 
 The `credits.txt` popup renders the hardcoded `credits` array in `src/components/MusicPlayer.jsx`; it does not load a text file. Each credit section must be a top-level array entry. Its `links` contain only labeled URLs; formatted attribution can use the optional `attribution` field. The sound-effect sections were previously nested inside the music section's links and were therefore omitted by the link renderer. They now render alongside the existing music credit, and the supplied Pixabay HTML attribution is represented as text and real links rather than an invalid URL. The original attribution wording, source URLs, and popup styling are retained.
 
-## Shared visitor count: approval and configuration pending
+## Shared session visitor count
 
-The counter intentionally displays `----`. There is no counter request, external account, tracking script, invented total, frontend credential, or service integration yet. `VisitorCounter` accepts a nonnegative safe integer or decimal string as its `count` prop, pads to four digits, and lets larger numbers expand the original border. Invalid/unavailable values display `----`.
-
-Researched options (November 2026):
-
-- **Recommended: Cloudflare Worker + SQLite Durable Object on Workers Free.** Requires your approval, a Cloudflare account, and a separately deployed endpoint. Store just the total plus short-lived random request IDs for deduplication; do not store IPs, user agents, cookies, or fingerprint data in application storage. Hosting still processes connection metadata under its own policies. The [official counter example](https://developers.cloudflare.com/durable-objects/examples/build-a-counter/) shows persistent increments; [pricing](https://developers.cloudflare.com/durable-objects/platform/pricing/) confirms SQLite-backed Durable Objects are available on Workers Free with limits. Remain on the Free plan.
-- **CounterAPI V2 behind a small server-side proxy.** Requires an account/workspace and token, retained only on the server. Their [authentication documentation](https://docs.counterapi.dev/api/authentication/) says V1 is retired; do not use old unauthenticated V1 snippets. Their [free tier](https://counterapi.dev/pricing/) currently allows 1,000 counts/day. Check current terms and provider logging policy before approval.
-
-After you approve a provider:
-
-1. Create/configure the endpoint separately, with atomic persistent increments, CORS restricted to the approved portfolio/local review origins, and no caching of increments.
-2. Use a POST with a random per-document request ID (not a visitor identifier), returning `{ "count": "decimal total" }`. Deduplicate that ID on the server for any retries. Do not deduplicate by visitor: refreshes and repeat visitors should count.
-3. Hold one request promise and request ID on a document-scoped global so Strict Mode remounts and Vite hot reload reuse the same result. A fresh document/new tab gets a fresh ID. Keep local development from incrementing production counts by default.
-4. Use omitted credentials, a no-referrer policy, a timeout, validation, and a `----` fallback on failure. Never automatically retry an increment with a different ID. Do not put private tokens in `VITE_*` variables.
-5. Wire the confirmed response into `VisitorCounter`. Confirm re-renders, Strict Mode, and hot reload issue only one increment per document; confirm refreshing increments again.
-
-This is a page-load total, not a count of unique people. Repeat visits and automated traffic can increase it; blocked/failed requests can undercount it. CORS is not an anti-bot mechanism.
+The approved implementation counts sessions with 30-minute server-side inactivity expiry, not page views. Refreshes, new tabs, Strict Mode, and welcome interactions do not increment an active session. The existing footprint, tooltip, zero padding, and `----` fallback are retained. The separate Worker is deployed, and the approved GitHub Pages workflow enables the public endpoint for production builds. See [visitor-counter setup and deployment verification](visitor-counter.md).
 
 ## Local verification
 
@@ -53,7 +38,7 @@ This is a page-load total, not a count of unique people. Repeat visits and autom
 - Credits browser checks passed: opened, closed, and reopened the popup without navigation. All three sections, the original music credit, both sound-effect credits, and the supplied source links were present. Every credit link had an HTTPS URL rather than pasted HTML. The popup stylesheet was unchanged; a review capture is saved as `tmp-screens/welcome-credits-fixed.png`.
 - Headless Edge checked fresh loads and refresh, EXIT dialogue, skipping typing, atomic kaomoji reveal, focus trapping/restoration, keyboard START, duplicate START protection, tooltip, reduced motion, simultaneous opposite slide directions and overlay fade. The downward group reached 770px on a 770px viewport at transition end; the portfolio rectangle stayed unchanged throughout.
 - Responsive checks: 1366 × 770, 1024 × 768, 768 × 1024, 390 × 844, 320 × 568, 844 × 390, and 568 × 320. No horizontal overflow or dialogue/button overlap; START/EXIT targets are at least 44px high.
-- Review captures and the disposable browser script are in ignored `tmp-screens/welcome-*` files. These checks do not certify other browsers or a live counter, which remains unconfigured.
+- Review captures and the disposable browser script are in ignored `tmp-screens/welcome-*` files. These welcome checks do not certify other browsers. Separate backend deployment checks are recorded in [the visitor-counter documentation](visitor-counter.md).
 
 ## Files added or changed for this implementation
 
