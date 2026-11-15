@@ -38,7 +38,7 @@ export default function FeaturedProjects() {
             screenshot="/images/hive.png"
             open={activeProject === 'HIVE'}
             onOpenChange={value => changePreview('HIVE', value)}
-            href="https://drive.google.com/drive/folders/12eh_ikcEwX-_JjTiAMsQkEvu3S9VOCdw?usp=sharing"
+            href="https://drive.google.com/file/d/1i5X9nGBQqghJafu1yxjzd-QT3kSag2IM/view?usp=sharinghttps://drive.google.com/drive/folders/12eh_ikcEwX-_JjTiAMsQkEvu3S9VOCdw?usp=sharing"
           />
         </li>
       </ol>
