@@ -7,7 +7,7 @@ import { useState } from 'react'
 const projects = [
   { title: 'Class Connect', screenshot: '/images/projects/classconnect.png' },
   { title: 'Music Diary', screenshot: null},
-  { title: 'SuDo', screenshot: null },
+  { title: 'Archia World (Game)', screenshot: null },
 ]
 
 export default function FeaturedProjects() {

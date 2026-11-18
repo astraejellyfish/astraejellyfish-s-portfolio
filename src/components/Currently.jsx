@@ -1,6 +1,6 @@
 ﻿const activities = [
   ['studying', 'computer science'], ['building', 'school projects'],
-  ['learning', 'new technologies'], ['creating', 'arts'],
+  ['learning', 'new technologies'], ['creating', 'sprite sheets and tilesets'],
   ['exploring', 'korean · french · music'],
 ]
 import BarcodeDecoration from './BarcodeDecoration'
