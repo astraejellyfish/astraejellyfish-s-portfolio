@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 
-// can edit these sections when replacing the audio or adding attribution details.
+// replacing the audio or adding attribution details.
 const credits = [
   { title: 'audio', text: 'music cover by certified trash', links: [
     { label: 'youtube: @certifiedtrash', href: 'https://www.youtube.com/@certifiedtrash' },

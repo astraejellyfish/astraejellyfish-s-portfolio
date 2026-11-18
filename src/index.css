@@ -188,21 +188,52 @@ a:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px; }
 .character-frame img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center; }
 .decorative-images .panel { overflow: hidden; }
 
+
+
 @media (min-width: 1600px) and (min-height: 1000px) {
-  :root {font-size: 16px;}
-  .portfolio-shell {max-width: 1600px;padding: 60px 80px;}
-  .portfolio-header {height: 150px;}
-  .portfolio-heading {width: 700px; font-size: 72px;}
-  .portfolio-grid {gap: 30px;margin-top: 32px;}
+  .portfolio-shell {width: 100%; max-width: 1840px; padding: 60px 64px; margin: 0 auto;}
+  .portfolio-header { height: 170px; grid-template-columns: minmax(0, 664fr) minmax(0, 574fr);}
+  .portfolio-heading { width: 760px; font-size: 82px;
+  }
+  .header-status { font-size: 14px; bottom: 10px;
+  }
+
+  .portfolio-grid {
+    grid-template-columns:
+      minmax(0, 316fr)
+      minmax(0, 562fr)
+      minmax(0, 316fr);
+    gap: 32px; margin-top: 36px;}
   .left-column,
-  .right-column {height: 620px;}
-  .section-heading {font-size: 18px;}
-  .quests-panel {height: 290px;}
-  .social-panel {height: 230px;}
-  .about-panel {min-height: 420px;}
-  .portfolio-note {min-height: 140px;}
-  .projects-panel {height: 180px;}
+  .right-column {height: 700px; padding: 24px;}
+  .section-heading {font-size: 19px; line-height: 26px;}
+  .quests-panel {height: 320px;}
+  .quest-row {height: 43px;}
+  .quest-title { font-size: 15px; line-height: 19px;}
+  .quest-status {font-size: 13px;}
+  .social-panel { height: 240px; margin-top: 34px;}
+  .social-list li { height: 38px;}
+  .social-list img { width: 38px; height: 32px;}
+  .center-column { gap: 28px;}
+  .about-panel { min-height: 500px; padding: 32px 36px; }
+  .about-intro { grid-template-columns: 190px minmax(0, 1fr); gap: 32px; }
+  .profile-image { width: 190px; height: 190px;}
+  .bio { line-height: 25px; }
+  .likes-list { grid-template-columns: 210px minmax(0, 1fr); grid-template-rows: repeat(3, 24px); }
+  .likes-list li { line-height: 24px; }
+  .currently { margin-top: 14px; }
+  .currently dl > div {
+    grid-template-columns: 120px minmax(0, 1fr); line-height: 26px; }
+  .portfolio-note { min-height: 155px; padding: 28px 20px; line-height: 25px; }
+  .projects-panel { height: 185px; }
+  .case-panel { min-height: 90px;margin-top: 34px; }
+  .decorative-images { margin-top: 24px; gap: 20px; }
+  .cat-frame,
+  .character-frame { width: 140px; height: 110px;}
+  .music-corner { min-height: 88px; margin-top: 24px; font-size: 14px;}
+.vinyl-button { width: 64px; height: 64px; flex-basis: 64px;}
 }
+
 
 @media (max-width: 1250px) {
   .portfolio-shell { padding: 32px 28px; }

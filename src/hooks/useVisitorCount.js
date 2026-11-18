@@ -11,7 +11,7 @@ function getCounter() {
     origin: window.location.origin,
   })
   if (!settings) return null
-  // Survives Strict Mode, welcome remounts, and hot module replacement.
+
   if (window[documentKey]?.endpoint !== settings.endpoint) {
     window[documentKey]?.counter.dispose()
     window[documentKey] = { endpoint: settings.endpoint, counter: createVisitCounter(settings) }
