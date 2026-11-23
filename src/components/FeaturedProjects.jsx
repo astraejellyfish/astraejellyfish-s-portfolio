@@ -1,53 +1,32 @@
-﻿import Panel, { Decoration } from './Panel'
-import ProjectCard from './ProjectCard'
-import DecorativeSticker from './DecorativeSticker'
-import MusicPlayer from './MusicPlayer'
-import { useState } from 'react'
+﻿import Panel from './Panel'
+import PortfolioCarousel from './PortfolioCarousel'
+import { projects } from '../data/projects'
 
-const projects = [
-  { title: 'Class Connect', screenshot: '/images/projects/classconnect.png' },
-  { title: 'Music Diary', screenshot: null},
-  { title: 'Archia World (Game)', screenshot: null },
-]
+function ProjectCaption({ project }) {
+  const { title, description, status, role, liveUrl } = project
+  const statusClass = status === 'online' ? 'status-online' : status === 'in development' ? 'status-in-development' : ''
 
-export default function FeaturedProjects() {
-  const [activeProject, setActiveProject] = useState(null)
-  const changePreview = (title, value) => {
-    setActiveProject(current => {
-      const next = typeof value === 'function' ? value(current === title) : value
-      return next ? title : current === title ? null : current
-    })
-  }
-  return <aside className="panel right-column" aria-label="Programming projects and case study">
-    <Panel title="featured projects" className="projects-panel">
-      <ol className="h-[93px]" aria-label="Featured programming projects">
-        {projects.map((project, index) => (
-          <li key={project.title} className="h-[31px] min-w-0 bg-[url('/figma/row-line.svg')] bg-size-[100%_1px] bg-position-[left_bottom] bg-no-repeat">
-            <ProjectCard {...project} number={index + 1} open={activeProject === project.title} onOpenChange={value => changePreview(project.title, value)} />
-          </li>
-        ))}
-      </ol>
-      <Decoration>⡞⠳⣄⣀⣠⠞⢷ ֹ۪</Decoration>
-    </Panel>
-    <Panel title="case study" className="case-panel">
-      <ol className="numbered-list">
-        <li>
-          <ProjectCard
-            title="HIVE"
-            number={1}
-            screenshot="/images/hive.png"
-            open={activeProject === 'HIVE'}
-            onOpenChange={value => changePreview('HIVE', value)}
-            href="https://heyzine.com/flip-book/a7d949db29.html"
-          />
-        </li>
-      </ol>
-    </Panel>
-    <div className="decorative-images flex justify-between" aria-hidden="true">
-      <DecorativeSticker className="panel cat-frame" src={`${import.meta.env.BASE_URL}figma/cat.gif`} width={1080} height={1080} tilt={-4} />
-      <DecorativeSticker className="panel character-frame" src={`${import.meta.env.BASE_URL}figma/neon-character.png`} width={1024} height={1280} tilt={4} />
-    </div>
-    <MusicPlayer />
-  </aside>
+  return <>
+    <h3 className="carousel-title section-heading">{title}</h3>
+    <p className="carousel-description">{description}</p>
+    <p className="carousel-role">{role}</p>
+    <p className="carousel-status">
+      <span className={`status-indicator ${statusClass}`} aria-hidden="true" />
+      status: {status}
+      {liveUrl && <a className="project-live-link" href={liveUrl} target="_blank" rel="noopener noreferrer" aria-label={`Open ${title} on Vercel (opens in a new tab)`}>↗</a>}
+    </p>
+  </>
 }
 
+export default function FeaturedProjects() {
+  return <section id="featured-projects" className="featured-projects-section" aria-label="Featured projects">
+    <Panel title="featured projects" className="portfolio-carousel-panel project-carousel-panel">
+      <PortfolioCarousel
+        items={projects}
+        label="Featured projects"
+        imageClassName="project-carousel-image"
+        renderCaption={project => <ProjectCaption project={project} />}
+      />
+    </Panel>
+  </section>
+}

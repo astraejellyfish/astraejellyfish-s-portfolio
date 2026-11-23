@@ -11,7 +11,16 @@ const subscribeMotionPreference = notify => {
 }
 const readMotionPreference = () => window.matchMedia(motionQuery).matches
 
-export default function ProjectCard({ title, screenshot, number, open, onOpenChange: setOpen, href }) {
+export default function ProjectCard({
+  title,
+  screenshot,
+  number,
+  open,
+  onOpenChange: setOpen,
+  href,
+  className = '',
+  previewUnavailableText = 'Coming soon 𓏲๋࣭࣪˖🪼.ᐟ',
+}) {
   const reduceMotion = useSyncExternalStore(subscribeMotionPreference, readMotionPreference, () => true)
   const [position, setPosition] = useState(null)
   const [failedScreenshot, setFailedScreenshot] = useState(null)
@@ -81,8 +90,8 @@ export default function ProjectCard({ title, screenshot, number, open, onOpenCha
     <div
       className={large ? 'flex aspect-[8/5] items-center justify-center text-[14px]' : 'h-full w-full'}
       role={large ? 'img' : undefined}
-      aria-label={large ? `${title} screenshot placeholder` : undefined}
-    >{large ? 'Coming soon 𓏲๋࣭࣪˖🪼.ᐟ' : null}</div>
+      aria-label={large ? `${title}: ${previewUnavailableText}` : undefined}
+    >{large ? previewUnavailableText : null}</div>
   )
 
   return (
@@ -93,7 +102,7 @@ export default function ProjectCard({ title, screenshot, number, open, onOpenCha
         href={href}
         target={href ? '_blank' : undefined}
         rel={href ? 'noopener noreferrer' : undefined}
-        className={href ? 'external-row' : 'flex h-[31px] w-full min-w-0 cursor-default items-center gap-[6px] bg-transparent pl-[10px] text-left text-inherit focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent'}
+        className={`${href ? 'external-row' : 'flex h-[31px] w-full min-w-0 cursor-pointer items-center gap-[6px] bg-transparent pl-[10px] text-left text-inherit focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent'} ${className}`}
         aria-label={href ? `${String(number).padStart(2, '0')} ${title} case study (opens in a new tab)` : `Preview ${title}`}
         aria-describedby={open ? previewId : undefined}
         aria-expanded={open}
