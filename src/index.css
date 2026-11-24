@@ -47,10 +47,10 @@ a:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px; }
 .navigation-panel .navigation-list { display: flex; height: 100%; flex-direction: column; justify-content: space-between; }
 .navigation-list li { padding-left: 0; }
 .navigation-link { display: flex; align-items: center; gap: 6px; height: 100%; padding: 0 6px; transition: background-color 180ms ease-out; }
-.navigation-link[aria-current="location"] { background: rgb(4 246 1 / 20%); }
+.navigation-link[aria-current="location"] { background: rgb(4, 255, 0); }
 .navigation-link:focus-visible { outline: 2px solid var(--color-foreground); outline-offset: -2px; }
 .navigation-link .section-heading { flex: 0 0 16px; }
-.navigation-link:hover { background-color: rgb(4 246 1 / 50%); }
+.navigation-link:hover { background-color: rgb(148, 247, 146); }
 .quests-panel { height: 247px; }
 .quest-row {
   display: flex;
@@ -61,7 +61,7 @@ a:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px; }
   background: url('/figma/row-line.svg') left bottom / 100% 1px no-repeat;
   transition: background-color 225ms ease-out;
 }
-.quest-row:hover { background-color: rgb(4 246 1 / 90%); }
+.quest-row:hover { background-color: rgb(4 246 1 / 100%); }
 .quest-icon { flex: 0 0 14px; }
 .quest-details { min-width: 0; }
 .quest-title { font-size: 13px; line-height: 16px; }
